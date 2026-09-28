@@ -16,7 +16,15 @@ app.add_middleware(
 )
 
 # Load trained model
-MODEL = tf.keras.models.load_model("fertilizer_model.keras")
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "fertilizer_model.keras")
+print("DEBUG cwd:", os.getcwd())
+print("DEBUG BASE_DIR:", BASE_DIR)
+print("DEBUG files in BASE_DIR:", os.listdir(BASE_DIR))
+print("DEBUG model exists:", os.path.exists(MODEL_PATH),
+      "size:", os.path.getsize(MODEL_PATH) if os.path.exists(MODEL_PATH) else "n/a")
+MODEL = tf.keras.models.load_model(MODEL_PATH)
 
 CLASSES = ['ALL Present', 'ALLAB', 'KAB', 'NAB', 'PAB', 'ZNAB']
 
